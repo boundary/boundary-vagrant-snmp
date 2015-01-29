@@ -22,7 +22,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      shell.inline = "puppet module install puppetlabs-stdlib;
                      puppet module install maestrodev-maven;
                      puppet module install razorsedge-snmp;
-                     puppet module install 7terminals-java;
                      exit 0"
   end
 
