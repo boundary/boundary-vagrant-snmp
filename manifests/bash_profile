@@ -1,0 +1,15 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+# Set command line editin to use vi/vim
+set -o vi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/bin:$ELASTICSEARCH_INSTALL/bin
+
+export PATH
