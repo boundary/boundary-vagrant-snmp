@@ -11,6 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "puppetlabs/centos-6.5-64-puppet"
+  config.vm.box_url = "https://vagrantcloud.com/puppetlabs/boxes/centos-6.5-64-puppet"
   config.vm.hostname = "boundary-snmp"
 
   #
