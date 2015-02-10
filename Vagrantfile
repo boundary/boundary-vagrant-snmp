@@ -5,14 +5,42 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "puppetlabs/centos-6.5-64-puppet"
-  config.vm.box_url = "https://vagrantcloud.com/puppetlabs/boxes/centos-6.5-64-puppet"
-  config.vm.hostname = "boundary-snmp"
+  config.vm.define "boundary-snmp-001" do |v|
+    v.vm.box = "puppetlabs/centos-6.5-64-puppet"
+    v.vm.box_url = "https://vagrantcloud.com/puppetlabs/boxes/centos-6.5-64-puppet"
+    v.vm.hostname = "boundary-snmp-001"
+    v.vm.network "private_network", ip: "192.168.33.21"
+
+  end
+
+  config.vm.define "boundary-snmp-002" do |v|
+    v.vm.box = "puppetlabs/centos-6.5-64-puppet"
+    v.vm.box_url = "https://vagrantcloud.com/puppetlabs/boxes/centos-6.5-64-puppet"
+    v.vm.hostname = "boundary-snmp-002"
+    v.vm.network "private_network", ip: "192.168.33.22"
+  end
+
+  config.vm.define "boundary-snmp-003" do |v|
+    v.vm.box = "puppetlabs/centos-6.5-64-puppet"
+    v.vm.box_url = "https://vagrantcloud.com/puppetlabs/boxes/centos-6.5-64-puppet"
+    v.vm.hostname = "boundary-snmp-003"
+    v.vm.network "private_network", ip: "192.168.33.23"
+  end
+
+  config.vm.define "boundary-snmp-monitor-001" do |v|
+    v.vm.box = "puppetlabs/centos-6.5-64-puppet"
+    v.vm.box_url = "https://vagrantcloud.com/puppetlabs/boxes/centos-6.5-64-puppet"
+    v.vm.hostname = "boundary-snmp-monitor-001"
+    v.vm.network "private_network", ip: "192.168.33.11"
+  end
+
+  config.vm.define "boundary-puppet-master-001" do |v|
+    v.vm.box = "puppetlabs/centos-6.5-64-puppet"
+    v.vm.box_url = "https://vagrantcloud.com/puppetlabs/boxes/centos-6.5-64-puppet"
+    v.vm.hostname = "boundary-puppet-master-001"
+    v.vm.network "private_network", ip: "192.168.33.01"
+  end
 
   #
   # Add the required puppet modules before provisioning is run by puppet
@@ -22,6 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      shell.inline = "puppet module install puppetlabs-stdlib;
                      puppet module install maestrodev-maven;
                      puppet module install razorsedge-snmp;
+                     puppet module install puppetlabs-firewall;
                      exit 0"
   end
 
@@ -34,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", protocol: "udp", guest: 161, host: 12161
+  #config.vm.network "forwarded_port", protocol: "udp", guest: 161, host: 1161
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
